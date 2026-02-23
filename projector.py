@@ -146,6 +146,7 @@ class projector(nn.Module):
         # depth_map : [B, 1, H, W]
         # pose : [B, 6]
         # intrinsic : [B, 3, 3]
+
         frustum = self.backprojectDepth(depth_map, intrinsic) # [B, H, W, 3]
         
         points_3D = self.project3D(frustum, pose) # [B, H, W, 3]

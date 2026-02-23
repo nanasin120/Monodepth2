@@ -72,5 +72,5 @@ class poseNetwork(nn.Module):
     def forward(self, I1, I2):
         out = self.encoder(I1, I2)
         out = self.decoder(out)
-
+        
         return out
