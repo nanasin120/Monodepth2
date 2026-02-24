@@ -7,6 +7,7 @@ from poseNetwork import poseNetwork
 from projector import projector
 import random
 import matplotlib
+import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
@@ -16,11 +17,17 @@ depthNetwork = depthNetwork().to(device)
 poseNetwork = poseNetwork().to(device)
 projector = projector().to(device)
 
-depthNetwork.load_state_dict(torch.load(r'depth_model_save\best_depth_model_epoch.pth', weights_only=True))
-poseNetwork.load_state_dict(torch.load(r'pose_model_save\best_pose_model_epoch.pth', weights_only=True))
+version = 300
+
+if version == -1 :
+    depthNetwork.load_state_dict(torch.load(r'depth_model_save\best_depth_model_epoch.pth', weights_only=True))
+    poseNetwork.load_state_dict(torch.load(r'pose_model_save\best_pose_model_epoch.pth', weights_only=True))
+elif version > 0 :
+    depthNetwork.load_state_dict(torch.load(r'depth_model_save\depth_model_epoch_' + f'{version}' + '.pth', weights_only=True))
+    poseNetwork.load_state_dict(torch.load(r'pose_model_save\pose_model_epoch_' + f'{version}' + '.pth', weights_only=True))   
 
 root_dirs = [r'C:\Users\MSI\Desktop\DrivingData\Monodepth2\data_1']
-full_dataset = UnityDataset(root_dirs)
+full_dataset = UnityDataset(root_dirs, False)
 
 sample_idx = random.randint(0, len(full_dataset))
 sample = full_dataset[sample_idx]
@@ -39,9 +46,6 @@ with torch.no_grad():
 target_image = target_image.squeeze(0).permute(1, 2, 0).cpu().numpy()
 target_image = (target_image * 255).astype(np.uint8)
 
-pil_img = Image.fromarray(target_image)
-pil_img.show()
-
 disp = disp.squeeze(0).squeeze(0).cpu().numpy()
 disp = (disp - disp.min()) / (disp.max() - disp.min() + 1e-7)
 #disp = (disp * 255).astype(np.uint8)
@@ -50,5 +54,7 @@ disp_magma = magma_map(disp) # [H, W, 4]
 
 disp_magma = (disp_magma[:, :, :3] * 255).astype(np.uint8)
 
-pil_img = Image.fromarray(disp_magma)
+combined_img = np.hstack((target_image, disp_magma))
+
+pil_img = Image.fromarray(combined_img)
 pil_img.show()
