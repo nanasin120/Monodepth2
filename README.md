@@ -4,6 +4,8 @@
 # 1. 프로젝트 소개
 본 프로젝트는 Monodepth2를 이용해 Unity가상환경을 통해 구한 데이터에서 깊이 정보를 자기-지도 학습하는 프로젝트입니다.
 <img width="1280" height="192" alt="tmpmheujs5n" src="https://github.com/user-attachments/assets/c79f003c-d4ca-44a8-a3aa-344f073171d6" />
+<img width="1280" height="192" alt="tmpuoeicoae" src="https://github.com/user-attachments/assets/bd559019-5f0e-40aa-bbde-e769d53a5e2b" />
+위 사진은 유니티 세상에서 찍은 데이터로 추정한 깊이와 실제 현실 세상에서 찍은 데이터로 추정한 깊이입니다.
 
 ## Tech Stack
 * Environment: Unity (데이터 생성)
