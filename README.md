@@ -46,3 +46,6 @@
 <img width="1304" height="217" alt="image" src="https://github.com/user-attachments/assets/cebff570-262e-4652-a176-587b884b5f0c" />
 
 어느정도 경계선도 잡고 원거리 지평선도 잡은 것으로 보입니다. 하지만 멀리있는 건물이나 나무와 같은 구조물은 아직 잘 잡지 못하는것으로 보입니다.
+
+## License
+This repository is for portfolio and educational purposes only. All rights reserved by the author.
